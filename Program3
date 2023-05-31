@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include<time.h>
+
+int n,temp;
+
+void main()
+{
+        clock_t start,end;
+        double total;
+
+        //Function Prototypes
+        void BubbleSort(int arr[n]);
+        void InsertionSort(int arr[n]);
+        void PrintThisArray(int arr[n]);
+
+        //Input array from user
+        printf("Enter the number of elements\n");
+        scanf("%d",&n);
+
+        int arr1[n], arr2[n];
+
+        printf("Enter the elements in the array\n");
+        for(int i=0; i<n; i++)
+        {
+                scanf("%d",&arr1[i]);
+                arr2[i]=arr1[i];
+        }
+
+
+        //Bubble sort call
+        start=clock();
+        BubbleSort(arr1);
+        end= clock();
+        total=(double)(end-start)/CLOCKS_PER_SEC;
+        printf("Total Time taken: %f\n",total);
+
+
+        //Insertion sort call
+        start=clock();
+        InsertionSort(arr2);
+        end=clock();
+        total=(double)(end-start)/CLOCKS_PER_SEC;
+        printf("Total Time taken: %f\n",total);
+        }
+        
+        void PrintThisArray(int arr[n])
+{
+        for(int i=0;i<n;i++)
+                printf("%d\t",arr[i]);
+        printf("\n");
+}
+
+
+void BubbleSort(int arr[n])
+{
+        for(int i=0;i<n;i++)
+        {
+                for (int j=0; j<n-1-i; j++)
+                {
+                        if(arr[j]>arr[j+1])
+                        {
+                                temp=arr[j];
+                                arr[j]=arr[j+1];
+                                arr[j+1]=temp;
+                        }
+                }
+        }
+
+        //Printing the array function call
+        printf("After Bubble Sort, the following is the array:\n");
+        PrintThisArray(arr);
+
+}
+void InsertionSort(int arr[n])
+{
+        int j;
+        int key;
+        for (int i=1; i<n; i++)
+        {
+                key=arr[i];
+                j=i-1;
+                while(j>=0 && arr[j]>key)
+                {
+                        arr[j+1]=arr[j];
+                        j=j-1;
+                }
+                arr[j+1]=key;
+        }
+        //Printing array function cal
+        printf("After Insertion Sort, the following is the array:\n");
+        PrintThisArray(arr);
+}
